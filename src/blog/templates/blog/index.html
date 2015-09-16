@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="posts">
+{% for post in posts %}
+    <div class="post">
+        <header class="post-header">
+            <h2 class="post-title"><a href="{% url 'detail' post.pk %}">{{post.pub_date}}</a></h2>
+            <p class="post-meta">
+                Meal size: {{post.meal_size}}, Calories: {{post.total_calories}}
+            </p>
+        </header>
+        <div class="post-description">
+        <p>{{ post.text }}</p>
+        {% if post.fruit_detail %}
+        <p>Fruits eaten:
+            <ul>
+                {% for fruit in post.fruit_detail %}
+                    <li>{{fruit}}</li>
+                {% endfor %}
+            </ul>
+        </p>
+        {% else %}
+        <p>No fruits eaten.</p>
+        {% endif %}
+        </div>
+    </div>
+{% endfor %}
+</div>
+
+{% endblock %}
