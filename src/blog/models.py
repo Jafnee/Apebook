@@ -16,6 +16,12 @@ class Post(models.Model):
     def __str__(self):
         return self.text
 
+    def fruit_detail(self):
+        fruits = []
+        for fruit, eaten in zip(self.fruit_eaten.all(), self.fruiteaten_set.all()):
+            fruits.append(str(eaten.qty) + " " + fruit.name)
+        return fruits
+
     def total_calories(self):
         sum = 0
         for fruit, eaten in zip(self.fruit_eaten.all(), self.fruiteaten_set.all()):
